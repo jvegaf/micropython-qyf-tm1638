@@ -121,19 +121,6 @@ class TM1638:
             self._byte(b)
         self.stb(1)
 
-    def led(self, pos, val):
-        self.write([val], (pos << 1) + 1)
-
-    def leds(self, val):
-        self._write_data_cmd()
-        pos = 1
-        for i in range(8):
-            self.stb(0)
-            self._set_address(pos)
-            self._byte((val >> i) & 1)
-            pos += 2
-            self.stb(1)
-
     def segments(self, segments, pos=0):
         if not 0 <= pos <= 7:
             raise ValueError("Position out of range")
